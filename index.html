@@ -4,27 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Materi IPA Kelas 11</title>
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="home.css">
 </head>
 <body>
-<header>
-  <h1>Materi IPA Kelas 11</h1>
-  <p>Biologi, Fisika, dan Kimia per semester.</p>
-</header>
-<main class="wrap">
-  <div class="bar">
-    <div class="row" id="mapel"></div>
-    <div class="row" id="semester"></div>
-    <input id="cari" type="search" placeholder="Cari bab atau rumus…">
-  </div>
-  <div class="prog" id="prog"></div>
-  <div class="grid" id="grid"></div>
-</main>
+<main class="home">
+  <section class="kartu">
+    <div class="avatar">
+      <span>🔬</span>
+      <!-- Taruh fotomu sebagai foto.jpg di folder yang sama dengan file ini -->
+      <img src="foto.jpg" alt="" onerror="this.remove()">
+    </div>
 
-<!-- Data materi: tiap mapel satu file -->
-<script src="data/biologi.js"></script>
-<script src="data/fisika.js"></script>
-<script src="data/kimia.js"></script>
-<script src="script.js"></script>
+    <p class="salam" id="salam">Halo!</p>
+    <h1>Materi IPA</h1>
+    <p class="sub">Kelas 11 · Ringkasan dan rumus per bab</p>
+
+    <div class="statistik">
+      <span>4 Mapel</span>
+      <span>2 Semester</span>
+      <span><b id="jumlah">0</b> Bab selesai</span>
+    </div>
+
+    <nav class="mapel-container">
+      <a class="btn" href="materi/fisika.html">
+        <span class="ikon">⚛️</span>
+        <span class="teks"><b>Fisika</b><small>Gerak, energi, dan gelombang</small></span>
+        <span class="panah">→</span>
+      </a>
+      <a class="btn" href="materi/matematika.html">
+        <span class="ikon">➗</span>
+        <span class="teks"><b>Matematika</b><small>Angka, fungsi, dan peluang</small></span>
+        <span class="panah">→</span>
+      </a>
+      <a class="btn" href="materi/kimia.html">
+        <span class="ikon">🧪</span>
+        <span class="teks"><b>Kimia</b><small>Reaksi, zat, dan hitungan</small></span>
+        <span class="panah">→</span>
+      </a>
+      <a class="btn" href="materi/biologi.html">
+        <span class="ikon">🧬</span>
+        <span class="teks"><b>Biologi</b><small>Sel, tubuh, dan makhluk hidup</small></span>
+        <span class="panah">→</span>
+      </a>
+    </nav>
+
+    <button class="gold" id="semangat">Beri aku semangat!</button>
+    <p class="pesan" id="pesan" aria-live="polite"></p>
+  </section>
+</main>
+<script src="home.js"></script>
 </body>
 </html>
