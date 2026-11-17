@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fisika Kelas 11 - Semester 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#4f0000;
+  --card:#f6e7d6;
+  --btn:#590000;
+  --btn2:#7a0a0a;
+  --gold:#c9a227;
+  --tx:#4a0000;
+  --mu:#5f4d48;
+}
+
+* {box-sizing:border-box}
+
+body {
+  margin:0;
+  min-height:100vh;
+  color:var(--tx);
+  font:300 16px/1.6 Roboto,system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%,#7d0d1f,transparent 45%),
+    radial-gradient(circle at 90% 100%,#6a1020,transparent 42%),
+    var(--bg);
+  background-attachment:fixed;
+}
+
+.container {
+  width:min(850px,100%);
+  margin:auto;
+  padding:25px 16px 50px;
+}
+
+.card {
+  background:var(--card);
+  border-radius:24px;
+  padding:25px 20px;
+  box-shadow:0 18px 45px #0006;
+  animation:naik .6s ease;
+}
+
+@keyframes naik {
+  from {opacity:0;transform:translateY(20px)}
+  to {opacity:1;transform:none}
+}
+
+.back {
+  display:inline-block;
+  color:var(--card);
+  text-decoration:none;
+  margin-bottom:18px;
+  padding:8px 15px;
+  background:var(--btn);
+  border-radius:10px;
+}
+
+.back:hover {background:var(--btn2)}
+
+.hero {
+  text-align:center;
+  padding:10px 0 22px;
+}
+
+.icon {
+  width:95px;
+  height:95px;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:3rem;
+  background:linear-gradient(135deg,#590000,#9b1b34);
+  box-shadow:0 0 0 5px var(--card),
+             0 0 0 8px var(--gold);
+}
+
+h1 {
+  font-size:2.3rem;
+  font-weight:500;
+  margin:18px 0 0;
+}
+
+.hero p {color:var(--mu);margin:4px 0}
+
+.label {
+  display:inline-block;
+  margin-top:12px;
+  background:#590000;
+  color:#f6e7d6;
+  padding:5px 16px;
+  border-radius:30px;
+  font-size:.8rem;
+}
+
+.progress {
+  background:#ead5c2;
+  border-radius:16px;
+  padding:17px;
+  margin:12px 0 25px;
+}
+
+.progress-head {
+  display:flex;
+  justify-content:space-between;
+  font-weight:500;
+}
+
+.track {
+  height:10px;
+  background:#ddc7b5;
+  border-radius:20px;
+  overflow:hidden;
+  margin:10px 0 5px;
+}
+
+.fill {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#590000,#c9a227);
+  border-radius:20px;
+  transition:width .4s;
+}
+
+.progress small {color:var(--mu)}
+
+h2 {
+  font-size:1.2rem;
+  margin:25px 0 12px;
+}
+
+.bab {
+  border:1px solid #dfc9b7;
+  border-radius:15px;
+  margin-bottom:13px;
+  overflow:hidden;
+  background:#fff9f2;
+}
+
+.bab summary {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px;
+  cursor:pointer;
+  list-style:none;
+  background:var(--btn);
+  color:var(--card);
+  transition:background .2s;
+}
+
+.bab summary::-webkit-details-marker {display:none}
+.bab summary:hover {background:var(--btn2)}
+
+.nomor {
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:42px;
+  height:42px;
+  border-radius:11px;
+  background:#ffffff20;
+  color:#e2bd57;
+  font-weight:700;
+}
+
+.judul {flex:1}
+.judul b {display:block;font-size:1rem}
+.judul small {opacity:.8;font-size:.78rem}
+
+.arrow {transition:transform .2s}
+.bab[open] .arrow {transform:rotate(180deg)}
+
+.isi {
+  padding:18px;
+  color:var(--tx);
+}
+
+.isi h3 {
+  font-size:1rem;
+  margin:18px 0 5px;
+}
+
+.isi p {margin:6px 0}
+
+.isi ul {padding-left:20px}
+
+.rumus {
+  background:#f0dfce;
+  border-left:4px solid var(--gold);
+  border-radius:8px;
+  padding:12px;
+  margin:10px 0;
+  font-weight:500;
+  overflow-wrap:anywhere;
+}
+
+.catatan {
+  background:#f6e7d6;
+  border-radius:10px;
+  padding:12px;
+  margin:12px 0;
+  font-size:.9rem;
+}
+
+.selesai {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  border-top:1px solid #dfc9b7;
+  margin-top:18px;
+  padding-top:15px;
+  font-weight:500;
+}
+
+.selesai input {
+  width:19px;
+  height:19px;
+  accent-color:#590000;
+  cursor:pointer;
+}
+
+.reset {
+  display:block;
+  margin:22px auto 0;
+  background:var(--gold);
+  border:0;
+  color:#3a2a00;
+  padding:11px 22px;
+  border-radius:10px;
+  font:inherit;
+  font-weight:500;
+  cursor:pointer;
+}
+
+.footer {
+  text-align:center;
+  color:var(--mu);
+  margin-top:22px;
+  font-size:.85rem;
+}
+
+@media(min-width:700px) {
+  .card {padding:35px 40px}
+  h1 {font-size:2.7rem}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation:none!important;
+    transition:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<a href="../index.html" class="back">← Kembali ke Beranda</a>
+
+<section class="card">
+
+<header class="hero">
+  <div class="icon">⚛️</div>
+  <h1>Fisika</h1>
+  <p>Materi IPA Kelas 11</p>
+  <span class="label">SEMESTER 1</span>
+</header>
+
+<section class="progress">
+  <div class="progress-head">
+    <span>Progres Belajar</span>
+    <span id="persen">0%</span>
+  </div>
+  <div class="track">
+    <div class="fill" id="bar"></div>
+  </div>
+  <small id="hitung">0 dari 5 bab selesai</small>
+</section>
+
+<h2>📚 Daftar Materi Fisika</h2>
+
+<!-- BAB 1 -->
+<details class="bab">
+<summary>
+  <span class="nomor">01</span>
+  <span class="judul">
+    <b>Vektor dan Pengukuran</b>
+    <small>Besaran, satuan, dan operasi vektor</small>
+  </span>
+  <span class="arrow">⌄</span>
+</summary>
+<div class="isi">
+<h3>A. Besaran Fisika</h3>
+<p>Besaran adalah sesuatu yang dapat diukur dan dinyatakan dengan angka serta satuan.</p>
+<ul>
+<li>Besaran pokok: panjang, massa, waktu, suhu, kuat arus, jumlah zat, dan intensitas cahaya.</li>
+<li>Besaran turunan: kecepatan, percepatan, gaya, energi, dan tekanan.</li>
+</ul>
+
+<h3>B. Besaran Skalar dan Vektor</h3>
+<p>Skalar hanya memiliki nilai, sedangkan vektor memiliki nilai dan arah.</p>
+<p>Contoh skalar: massa, waktu, suhu.</p>
+<p>Contoh vektor: perpindahan, kecepatan, gaya.</p>
+
+<h3>C. Operasi Vektor</h3>
+<p>Untuk dua vektor yang saling tegak lurus:</p>
+<div class="rumus">R = √(A² + B²)</div>
+<p>Komponen vektor:</p>
+<div class="rumus">Ax = A cos θ<br>Ay = A sin θ</div>
+<p>Besar vektor:</p>
+<div class="rumus">A = √(Ax² + Ay²)</div>
+
+<h3>D. Pengukuran</h3>
+<p>Pengukuran menggunakan alat seperti mistar, jangka sorong, dan mikrometer sekrup. Hasil pengukuran perlu memperhatikan ketelitian alat dan angka penting.</p>
+
+<div class="catatan">💡 Ingat: besaran vektor harus memperhatikan arah, bukan hanya besar nilainya.</div>
+<label class="selesai">
+<input type="checkbox" class="cek" data-id="fisika-bab-1">
+Tandai bab ini selesai
+</label>
+</div>
+</details>
+
+<!-- BAB 2 -->
+<details class="bab">
+<summary>
+  <span class="nomor">02</span>
+  <span class="judul">
+    <b>Kinematika Gerak</b>
+    <small>Gerak lurus dan gerak parabola</small>
+  </span>
+  <span class="arrow">⌄</span>
+</summary>
+<div class="isi">
+<h3>A. Pengertian Gerak</h3>
+<p>Gerak adalah perubahan posisi suatu benda terhadap titik acuan dalam selang waktu tertentu.</p>
+
+<h3>B. Gerak Lurus Beraturan (GLB)</h3>
+<p>GLB adalah gerak pada lintasan lurus dengan kecepatan tetap.</p>
+<div class="rumus">v = s / t<br>s = v × t</div>
+
+<h3>C. Gerak Lurus Berubah Beraturan (GLBB)</h3>
+<p>GLBB memiliki percepatan tetap.</p>
+<div class="rumus">
+v = v₀ + at<br>
+s = v₀t + ½at²<br>
+v² = v₀² + 2as
+</div>
+
+<h3>D. Gerak Jatuh Bebas</h3>
+<p>Gerak benda jatuh karena gravitasi tanpa memperhitungkan hambatan udara.</p>
+<div class="rumus">
+v = gt<br>
+h = ½gt²
+</div>
+
+<h3>E. Gerak Parabola</h3>
+<p>Gerak parabola merupakan gabungan gerak horizontal beraturan dan gerak vertikal yang dipercepat gravitasi.</p>
+<div class="rumus">
+vx = v₀ cos θ<br>
+vy = v₀ sin θ - gt
+</div>
+
+<div class="catatan">💡 Ingat: percepatan gravitasi di dekat permukaan bumi sering dibulatkan menjadi 10 m/s².</div>
+<label class="selesai">
+<input type="checkbox" class="cek" data-id="fisika-bab-2">
+Tandai bab ini selesai
+</label>
+</div>
+</details>
+
+<!-- BAB 3 -->
+<details class="bab">
+<summary>
+  <span class="nomor">03</span>
+  <span class="judul">
+    <b>Dinamika Gerak</b>
+    <small>Hukum Newton dan gaya</small>
+  </span>
+  <span class="arrow">⌄</span>
+</summary>
+<div class="isi">
+<h3>A. Pengertian Gaya</h3>
+<p>Gaya adalah tarikan atau dorongan yang dapat mengubah gerak atau bentuk benda.</p>
+
+<h3>B. Hukum I Newton</h3>
+<p>Benda mempertahankan keadaan diam atau gerak lurus beraturan jika resultan gaya nol.</p>
+<div class="rumus">ΣF = 0</div>
+
+<h3>C. Hukum II Newton</h3>
+<p>Percepatan benda sebanding dengan resultan gaya dan berbanding terbalik dengan massanya.</p>
+<div class="rumus">ΣF = m × a</div>
+
+<h3>D. Hukum III Newton</h3>
+<p>Setiap aksi memiliki reaksi yang sama besar dan berlawanan arah, bekerja pada benda yang berbeda.</p>
+
+<h3>E. Jenis Gaya</h3>
+<ul>
+<li>Gaya berat: w = m × g</li>
+<li>Gaya normal: gaya tegak lurus bidang sentuh.</li>
+<li>Gaya gesek: f = μN untuk model gesekan kinetik atau gesekan statik maksimum.</li>
+<li>Gaya tegangan tali: T.</li>
+</ul>
+
+<div class="catatan">💡 Ingat: massa dinyatakan dalam kilogram, sedangkan berat merupakan gaya dengan satuan newton.</div>
+<label class="selesai">
+<input type="checkbox" class="cek" data-id="fisika-bab-3">
+Tandai bab ini selesai
+</label>
+</div>
+</details>
+
+<!-- BAB 4 -->
+<details class="bab">
+<summary>
+  <span class="nomor">04</span>
+  <span class="judul">
+    <b>Usaha dan Energi</b>
+    <small>Energi kinetik, potensial, dan daya</small>
+  </span>
+  <span class="arrow">⌄</span>
+</summary>
+<div class="isi">
+<h3>A. Usaha</h3>
+<p>Usaha adalah energi yang dipindahkan oleh gaya ketika benda mengalami perpindahan.</p>
+<div class="rumus">W = F × s × cos θ</div>
+
+<h3>B. Energi Kinetik</h3>
+<p>Energi yang dimiliki benda karena gerakannya.</p>
+<div class="rumus">Ek = ½mv²</div>
+
+<h3>C. Energi Potensial Gravitasi</h3>
+<p>Energi yang dimiliki benda karena kedudukannya terhadap titik acuan.</p>
+<div class="rumus">Ep = m × g × h</div>
+
+<h3>D. Energi Mekanik</h3>
+<p>Jumlah energi kinetik dan energi potensial.</p>
+<div class="rumus">Em = Ek + Ep</div>
+
+<h3>E. Daya</h3>
+<p>Daya adalah besar usaha yang dilakukan setiap satuan waktu.</p>
+<div class="rumus">P = W / t</div>
+
+<div class="catatan">💡 Ingat: hukum kekekalan energi menyatakan energi tidak dapat diciptakan atau dimusnahkan, tetapi dapat berubah bentuk.</div>
+<label class="selesai">
+<input type="checkbox" class="cek" data-id="fisika-bab-4">
+Tandai bab ini selesai
+</label>
+</div>
+</details>
+
+<!-- BAB 5 -->
+<details class="bab">
+<summary>
+  <span class="nomor">05</span>
+  <span class="judul">
+    <b>Momentum dan Impuls</b>
+    <small>Tumbukan dan hukum kekekalan momentum</small>
+  </span>
+  <span class="arrow">⌄</span>
+</summary>
+<div class="isi">
+<h3>A. Momentum</h3>
+<p>Momentum merupakan hasil kali massa dengan kecepatan benda.</p>
+<div class="rumus">p = m × v</div>
+
+<h3>B. Impuls</h3>
+<p>Impuls adalah perubahan momentum akibat gaya yang bekerja dalam selang waktu tertentu.</p>
+<div class="rumus">I = F × Δt = Δp</div>
+
+<h3>C. Hukum Kekekalan Momentum</h3>
+<p>Jika tidak ada resultan gaya luar, jumlah momentum sebelum tumbukan sama dengan jumlah momentum sesudah tumbukan.</p>
+<div class="rumus">
+m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'
+</div>
+
+<h3>D. Jenis Tumbukan</h3>
+<ul>
+<li>Tumbukan lenting sempurna: momentum dan energi kinetik total tetap.</li>
+<li>Tumbukan lenting sebagian: momentum tetap, energi kinetik total berkurang.</li>
+<li>Tumbukan tidak lenting sama sekali: kedua benda bergerak bersama setelah tumbukan.</li>
+</ul>
+
+<h3>E. Koefisien Restitusi</h3>
+<div class="rumus">
+e = (v₂' - v₁') / (v₁ - v₂)
+</div>
+<p>Persamaan tersebut menggunakan arah gerak yang konsisten pada satu sumbu.</p>
+
+<div class="catatan">💡 Ingat: momentum merupakan besaran vektor sehingga arah gerak harus diperhatikan.</div>
+<label class="selesai">
+<input type="checkbox" class="cek" data-id="fisika-bab-5">
+Tandai bab ini selesai
+</label>
+</div>
+</details>
+
+<button class="reset" id="reset">Reset Progres Fisika</button>
+
+<footer class="footer">
+  <p>🔬 Semangat belajar Fisika!</p>
+  <p>Materi IPA Kelas 11 · Semester 1</p>
+</footer>
+
+</section>
+</main>
+
+<script>
+const KEY = "ipa-selesai";
+const checks = document.querySelectorAll(".cek");
+
+function bacaData() {
+  try {
+    const data = JSON.parse(localStorage.getItem(KEY) || "{}");
+    return data && typeof data === "object" &&
+      !Array.isArray(data) ? data : {};
+  } catch {
+    return {};
+  }
+}
+
+function simpanData(data) {
+  localStorage.setItem(KEY, JSON.stringify(data));
+}
+
+function updateProgress() {
+  const data = bacaData();
+  let total = checks.length;
+  let jumlah = 0;
+
+  checks.forEach(check => {
+    check.checked = data[check.dataset.id] === true;
+    if (check.checked) jumlah++;
+  });
+
+  const persen = total ? Math.round(jumlah / total * 100) : 0;
+
+  document.getElementById("bar").style.width = persen + "%";
+  document.getElementById("persen").textContent = persen + "%";
+  document.getElementById("hitung").textContent =
+    jumlah + " dari " + total + " bab selesai";
+}
+
+checks.forEach(check => {
+  check.addEventListener("change", () => {
+    const data = bacaData();
+    data[check.dataset.id] = check.checked;
+    simpanData(data);
+    updateProgress();
+  });
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  if (!confirm("Yakin ingin menghapus progres Fisika?")) return;
+
+  const data = bacaData();
+
+  checks.forEach(check => {
+    delete data[check.dataset.id];
+  });
+
+  simpanData(data);
+  updateProgress();
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>
