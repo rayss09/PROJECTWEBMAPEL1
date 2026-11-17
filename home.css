@@ -51,6 +51,7 @@ h1{margin:2px 0 4px;font-size:clamp(1.9rem,7vw,2.4rem);font-weight:400;letter-sp
 @keyframes masuk{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
 /* Tablet */
 @media (min-width:600px){
   .kartu{width:min(600px,100%)}
@@ -60,6 +61,5 @@ h1{margin:2px 0 4px;font-size:clamp(1.9rem,7vw,2.4rem);font-weight:400;letter-sp
 @media (min-width:900px){
   .home{align-items:center}
   .kartu{width:min(820px,100%);padding:40px 48px 34px}
-  .avatar{width:150px;height:150px}
   .mapel-container{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 }
