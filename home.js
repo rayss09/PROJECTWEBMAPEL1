@@ -1,153 +1,41 @@
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const jam = new Date().getHours();
+  let waktu = "malam";
+  if (jam >= 4 && jam < 11) waktu = "pagi";
+  else if (jam >= 11 && jam < 15) waktu = "siang";
+  else if (jam >= 15 && jam < 18) waktu = "sore";
+  $("sapaan").textContent = `Selamat ${waktu}, selamat belajar!`;
+  $("tanggalHariIni").textContent = new Intl.DateTimeFormat("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date());
 
-var $ = function (id) { return document.getElementById(id); };
+  const motivasi = [
+    "Sedikit demi sedikit, lama-lama menjadi paham.",
+    "Tidak harus langsung bisa, yang penting terus mencoba.",
+    "Kesalahan adalah bagian dari proses belajar.",
+    "Rasa ingin tahu adalah awal dari pengetahuan.",
+    "Fokus pada proses, hasil akan mengikuti."
+  ];
+  $("gantiMotivasi").addEventListener("click", () => {
+    const lama = $("kalimatMotivasi").textContent;
+    let baru = lama;
+    while (baru === lama) baru = motivasi[Math.floor(Math.random()*motivasi.length)];
+    $("kalimatMotivasi").textContent = baru;
+  });
 
-// Sapaan sesuai jam di perangkat
-var jam = new Date().getHours();
-var waktu = "malam";
-
-if (jam >= 4 && jam < 11) waktu = "pagi";
-else if (jam >= 11 && jam < 15) waktu = "siang";
-else if (jam >= 15 && jam < 18) waktu = "sore";
-
-$("salam").textContent = "Selamat " + waktu + "! 👋";
-
-// Nama bab utama Fisika kelas XI
-var namaBab = {
-  "xi-vektor": "Vektor",
-  "xi-kinematika": "Kinematika",
-  "xi-dinamika": "Dinamika Gerak Partikel",
-  "xi-fluida": "Fluida",
-  "xi-gelombang": "Gelombang, Bunyi, dan Cahaya"
-};
-
-// Nama bab utama Kimia kelas XI
-var namaBabKimia = {
-  "kimia-struktur-atom": "Struktur Atom dan Sistem Periodik",
-  "kimia-ikatan": "Ikatan Kimia",
-  "kimia-stoikiometri": "Stoikiometri",
-  "kimia-hidrokarbon": "Hidrokarbon",
-  "kimia-termokimia": "Termokimia",
-  "kimia-laju-reaksi": "Laju Reaksi",
-  "kimia-kesetimbangan": "Kesetimbangan Kimia"
-};
-
-// Menghitung progres Fisika
-function tampilkanProgresFisika() {
-  var jumlah = 0;
-  var babTerakhir = null;
-
-  try {
-    var progres = JSON.parse(
-      localStorage.getItem("materi-fisika-xi-v2") || "{}"
-    );
-
-    var riwayat = JSON.parse(
-      localStorage.getItem("materi-fisika-xi-history-v1") || "{}"
-    );
-
-    Object.keys(namaBab).forEach(function (id) {
-      if (progres[id] === true) {
-        jumlah++;
-
-        var waktuSelesai = Number(riwayat[id]) || 0;
-
-        if (!babTerakhir || waktuSelesai > babTerakhir.waktu) {
-          babTerakhir = {
-            id: id,
-            nama: namaBab[id],
-            waktu: waktuSelesai
-          };
-        }
-      }
-    });
-
-  } catch (e) {
-    // Beranda tetap dapat dibuka jika penyimpanan browser tidak tersedia.
+  function bacaSelesai(key) {
+    try {
+      const data = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(data) ? data.length : 0;
+    } catch { return 0; }
   }
-
-  $("jumlah").textContent = jumlah;
-
-  var infoTerakhir = $("babTerakhir");
-
-  if (infoTerakhir) {
-    if (!babTerakhir) {
-      infoTerakhir.textContent = "Bab terakhir selesai: belum ada";
-    } else {
-      var tanggal = babTerakhir.waktu
-        ? new Date(babTerakhir.waktu).toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-          })
-        : "tanggal belum tercatat";
-
-      infoTerakhir.textContent =
-        "Bab terakhir selesai: " + babTerakhir.nama + " · " + tanggal;
-    }
+  function tampilkanProgress() {
+    const fisika = bacaSelesai("materi-fisika-xi-v2");
+    const kimia = bacaSelesai("materi-kimia-xi-v1");
+    $("jumlahFisika").textContent = fisika;
+    $("jumlahKimia").textContent = kimia;
+    $("barFisika").style.width = `${Math.min(100,fisika/7*100)}%`;
+    $("barKimia").style.width = `${Math.min(100,kimia/7*100)}%`;
   }
-}
-
-// Menghitung progres Kimia
-function tampilkanProgresKimia() {
-  var jumlah = 0;
-
-  try {
-    var progres = JSON.parse(
-      localStorage.getItem("materi-kimia-xi-v1") || "{}"
-    );
-
-    Object.keys(namaBabKimia).forEach(function (id) {
-      if (progres[id] === true) {
-        jumlah++;
-      }
-    });
-
-  } catch (e) {
-    // Progres Kimia tetap aman jika penyimpanan tidak tersedia.
-  }
-
-  var elemenKimia = $("jumlahKimia");
-
-  if (elemenKimia) {
-    elemenKimia.textContent = jumlah;
-  }
-}
-
-// Tampilkan semua progres
-function tampilkanSemuaProgres() {
-  tampilkanProgresFisika();
-  tampilkanProgresKimia();
-}
-
-tampilkanSemuaProgres();
-
-// Perbarui angka ketika pengguna kembali ke tab beranda
-window.addEventListener("focus", tampilkanSemuaProgres);
-window.addEventListener("storage", tampilkanSemuaProgres);
-
-// Tombol emas: kutipan semangat acak
-var kutipan = [
-  "Sedikit demi sedikit, lama-lama menjadi bukit.",
-  "Belajar hari ini, lega di hari ujian.",
-  "Kamu tidak harus sempurna, cukup mulai.",
-  "Rumus bisa dihafal, tapi paham itu lebih awet.",
-  "Istirahat sebentar boleh, menyerah jangan."
-];
-
-var terakhir = -1;
-
-$("semangat").addEventListener("click", function () {
-  var i;
-
-  do {
-    i = Math.floor(Math.random() * kutipan.length);
-  } while (i === terakhir);
-
-  terakhir = i;
-
-  var p = $("pesan");
-  p.textContent = kutipan[i];
-  p.classList.remove("muncul");
-  void p.offsetWidth;
-  p.classList.add("muncul");
-});
+  tampilkanProgress();
+  window.addEventListener("storage", tampilkanProgress);
+})();
