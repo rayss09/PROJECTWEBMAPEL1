@@ -199,6 +199,26 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
+
+.quiz-hint{margin:0 0 14px;padding:10px 13px;border-radius:11px;background:rgba(53,201,154,.09);border:1px solid rgba(53,201,154,.18);color:var(--muted);font-size:.82rem}
+
+/* Tampilan latihan soal */
+.quiz{margin:22px 0 16px;padding:17px;border:1px solid rgba(53,201,154,.28);border-radius:15px;background:rgba(7,29,24,.38)}
+.quiz-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.quiz-heading h3{margin:0;color:var(--green2);font-size:1.02rem}
+.quiz-heading span{font-size:.72rem;color:var(--muted)}
+.quiz-question{padding:13px 0;border-top:1px solid var(--line)}
+.quiz-question p{margin:0 0 9px;color:var(--ink);font-weight:700}
+.quiz-options{display:grid;gap:7px}
+.quiz-option{display:flex;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);cursor:pointer;color:#dceee7;font-size:.88rem}
+.quiz-option input{margin-top:5px;accent-color:var(--green)}
+.quiz-check{margin-top:10px;border:0;border-radius:9px;padding:8px 13px;background:var(--green);color:#08251d;font-weight:800;font-size:.82rem}
+.quiz-check:disabled{opacity:.55;cursor:default}
+.quiz-feedback{margin-top:8px;font-size:.82rem;color:var(--green2)}
+.quiz-feedback.wrong{color:#ffd19a}
+.quiz-result{margin-top:13px;padding:12px;border-radius:10px;background:rgba(53,201,154,.1);color:var(--green2);font-weight:700}
+.quiz-reset{margin-top:9px;border:1px solid var(--line);border-radius:9px;padding:7px 11px;background:transparent;color:var(--ink);font-weight:700}
+
 </style>
 </head>
 
@@ -243,13 +263,15 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
     <div class="progress-note" id="progressText">0 dari 7 bab utama selesai ditandai.</div>
   </section>
 
+  <p class="quiz-hint">💡 Latihan pilihan ganda tersedia di dalam setiap bab. Buka bab untuk melihat materi dan mengerjakan soalnya.</p>
+
   <div class="section-heading">
     <div><h2>Materi utama Kimia kelas XI</h2><p>Topik inti untuk membantu memahami konsep Kimia tingkat SMA.</p></div>
     <span class="count" id="mainCount">7 BAB</span>
   </div>
 
   <section class="chapter-list" id="mainChapters">
-    <details class="chapter" data-kind="utama" data-search="struktur atom konfigurasi elektron kulit orbital bilangan kuantum sistem periodik">
+    <details class="chapter" open data-kind="utama" data-search="struktur atom konfigurasi elektron kulit orbital bilangan kuantum sistem periodik">
       <summary>
         <span class="number">01</span>
         <span class="chapter-title"><b>Struktur Atom dan Sistem Periodik</b><small>Partikel penyusun atom, konfigurasi elektron, dan tabel periodik</small></span>
@@ -267,6 +289,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
         <div class="note">Elektron valensi adalah elektron pada kulit terluar yang berperan penting dalam pembentukan ikatan kimia.</div>
         <h3>D. Sistem periodik unsur</h3>
         <p>Unsur disusun berdasarkan kenaikan nomor atom. Baris disebut periode, sedangkan kolom disebut golongan. Sifat periodik antara lain jari-jari atom, energi ionisasi, afinitas elektron, dan elektronegativitas.</p>
+        <section class="quiz" data-quiz="kimia-struktur-atom"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-struktur-atom"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -288,6 +311,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
         <h3>D. Ikatan logam dan struktur Lewis</h3>
         <p>Ikatan logam dapat dipahami sebagai tarikan antara ion-ion logam dan elektron valensi yang bergerak relatif bebas. Struktur Lewis menggambarkan elektron valensi dengan titik di sekitar lambang unsur.</p>
         <div class="note">Perbedaan keelektronegatifan membantu memperkirakan kepolaran ikatan, tetapi bentuk molekul juga perlu diperhatikan untuk menentukan kepolaran molekul.</div>
+        <section class="quiz" data-quiz="kimia-ikatan"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-ikatan"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -311,6 +335,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
         <h3>D. Konsentrasi larutan</h3>
         <div class="formula-card"><span class="formula-label">Molaritas</span><div class="formula">\[M=\frac{n}{V}\]</div><div class="formula-explain">V adalah volume larutan dalam liter.</div></div>
         <div class="note">Saat mengerjakan soal stoikiometri, setarakan reaksi terlebih dahulu, ubah data menjadi mol, gunakan rasio koefisien, lalu ubah ke satuan yang diminta.</div>
+        <section class="quiz" data-quiz="kimia-stoikiometri"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-stoikiometri"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -337,6 +362,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
         <h3>D. Reaksi pembakaran</h3>
         <p>Pembakaran sempurna hidrokarbon menghasilkan karbon dioksida dan air, jika oksigen tersedia cukup.</p>
         <div class="formula-card"><span class="formula-label">Contoh pembakaran metana</span><div class="formula">\[CH_4+2O_2\rightarrow CO_2+2H_2O\]</div></div>
+        <section class="quiz" data-quiz="kimia-hidrokarbon"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-hidrokarbon"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -360,6 +386,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
         <h3>D. Hukum Hess</h3>
         <p>Perubahan entalpi reaksi hanya bergantung pada keadaan awal dan akhir. Karena itu, reaksi dapat dijumlahkan melalui beberapa tahap untuk memperoleh perubahan entalpi total.</p>
         <div class="note">Perhatikan tanda ΔH dan satuannya. Jika persamaan reaksi dibalik, tanda ΔH juga dibalik; jika koefisien dikalikan, ΔH ikut dikalikan.</div>
+        <section class="quiz" data-quiz="kimia-termokimia"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-termokimia"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -385,6 +412,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
           <li><b>Katalis:</b> menyediakan jalur reaksi alternatif dengan energi aktivasi lebih rendah.</li>
         </ul>
         <div class="note">Katalis mempercepat tercapainya keadaan akhir reaksi, tetapi tidak mengubah nilai perubahan entalpi reaksi.</div>
+        <section class="quiz" data-quiz="kimia-laju-reaksi"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-laju-reaksi"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -405,6 +433,7 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
         <h3>C. Asas Le Chatelier</h3>
         <p>Jika sistem setimbang diberi perubahan kondisi, sistem akan bergeser ke arah yang mengurangi pengaruh perubahan tersebut. Perubahan konsentrasi, tekanan atau volume (untuk gas), dan suhu dapat memengaruhi posisi kesetimbangan.</p>
         <div class="note">Katalis tidak menggeser posisi kesetimbangan dan tidak mengubah nilai tetapan kesetimbangan; katalis hanya membantu sistem mencapai kesetimbangan lebih cepat.</div>
+        <section class="quiz" data-quiz="kimia-kesetimbangan"></section>
         <label class="complete"><input class="done" type="checkbox" data-id="kimia-kesetimbangan"> Tandai bab ini selesai</label>
       </div>
     </details>
@@ -523,6 +552,93 @@ h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.045em;ma
     visibleChapters.forEach(chapter => chapter.open = shouldOpen);
     toggleAll.textContent = shouldOpen ? "Tutup semua bab" : "Buka semua bab";
   });
+
+  const bankSoal = {"kimia-struktur-atom": [["Partikel subatom yang memiliki muatan negatif adalah ...", ["Proton", "Elektron", "Neutron", "Nukleus"], 1, "Elektron bermuatan negatif; proton positif dan neutron netral."], ["Nomor atom (Z) menunjukkan jumlah ...", ["Neutron", "Proton", "Proton dan neutron", "Kulit elektron"], 1, "Nomor atom menyatakan jumlah proton dalam inti atom."], ["Atom netral memiliki jumlah proton yang ... jumlah elektronnya.", ["Lebih banyak", "Lebih sedikit", "Sama", "Tidak berkaitan"], 2, "Pada atom netral, jumlah proton sama dengan jumlah elektron."]], "kimia-ikatan": [["Ikatan ion terbentuk terutama karena ...", ["Pemakaian pasangan elektron bersama", "Perpindahan elektron dan tarik-menarik ion", "Penggabungan inti atom", "Pembentukan neutron"], 1, "Ikatan ion terjadi setelah perpindahan elektron yang menghasilkan ion positif dan negatif."], ["Ikatan kovalen terbentuk ketika atom-atom ...", ["Berbagi pasangan elektron", "Melepaskan proton", "Membentuk neutron", "Menghilangkan semua elektron"], 0, "Pada ikatan kovalen, atom menggunakan pasangan elektron bersama."], ["Ikatan logam melibatkan ion logam dan ...", ["Molekul air", "Elektron valensi yang relatif bebas bergerak", "Neutron bebas", "Gas mulia"], 1, "Elektron valensi yang terdelokalisasi membantu menjelaskan sifat khas logam."]], "kimia-stoikiometri": [["Satu mol zat mengandung sekitar ... partikel.", ["6,022 × 10²³", "3,14 × 10⁸", "9,8 × 10²", "1,0 × 10⁻³"], 0, "Bilangan Avogadro sekitar 6,022 × 10²³ partikel per mol."], ["Jika massa zat m dan massa molar M, jumlah mol n adalah ...", ["n = m × M", "n = M / m", "n = m / M", "n = m + M"], 2, "Jumlah mol diperoleh dengan membagi massa zat dengan massa molarnya."], ["Persamaan reaksi disetarakan agar ...", ["Warna zat sama", "Jumlah atom tiap unsur sama di kedua sisi", "Reaksi selalu lebih cepat", "Semua koefisien satu"], 1, "Penyetaraan mengikuti hukum kekekalan massa."]], "kimia-hidrokarbon": [["Hidrokarbon hanya tersusun dari unsur ...", ["Karbon dan oksigen", "Karbon dan hidrogen", "Hidrogen dan nitrogen", "Karbon dan belerang"], 1, "Hidrokarbon hanya mengandung karbon dan hidrogen."], ["Hidrokarbon jenuh dengan ikatan tunggal disebut ...", ["Alkena", "Alkuna", "Alkana", "Alkohol"], 2, "Alkana merupakan hidrokarbon jenuh dengan ikatan tunggal."], ["Rumus umum alkana rantai terbuka adalah ...", ["CₙH₂ₙ₊₂", "CₙH₂ₙ", "CₙH₂ₙ₋₂", "CₙHₙ"], 0, "Alkana rantai terbuka memiliki rumus umum CₙH₂ₙ₊₂."]], "kimia-termokimia": [["Reaksi eksoterm adalah reaksi yang ...", ["Menyerap kalor", "Melepaskan kalor ke lingkungan", "Tidak mengalami perubahan energi", "Selalu membutuhkan katalis"], 1, "Reaksi eksoterm melepaskan kalor; ΔH bernilai negatif."], ["Pada reaksi endoterm, nilai ΔH adalah ...", ["Negatif", "Positif", "Selalu nol", "Tidak memiliki tanda"], 1, "Reaksi endoterm menyerap kalor sehingga ΔH bernilai positif."], ["Rumus kalor untuk perubahan suhu adalah ...", ["q = m c ΔT", "q = m / c", "q = c / m", "q = m + c + ΔT"], 0, "Kalor dihitung dari massa, kalor jenis, dan perubahan suhu."]], "kimia-laju-reaksi": [["Laju reaksi menyatakan perubahan ... per satuan waktu.", ["Warna", "Konsentrasi pereaksi atau produk", "Massa inti atom", "Nomor atom"], 1, "Laju reaksi berkaitan dengan perubahan konsentrasi zat terhadap waktu."], ["Kenaikan suhu umumnya mempercepat reaksi karena ...", ["Partikel berhenti bergerak", "Energi kinetik partikel meningkat", "Jumlah atom berubah", "Katalis selalu terbentuk"], 1, "Suhu lebih tinggi meningkatkan peluang tumbukan efektif."], ["Katalis mempercepat reaksi dengan cara ...", ["Menaikkan energi aktivasi", "Mengubah nomor atom", "Menyediakan jalur dengan energi aktivasi lebih rendah", "Mengubah pereaksi seketika"], 2, "Katalis menyediakan jalur reaksi alternatif dengan energi aktivasi lebih rendah."]], "kimia-kesetimbangan": [["Kesetimbangan dinamis tercapai ketika ...", ["Semua reaktan habis", "Laju reaksi maju sama dengan laju balik", "Reaksi berhenti total", "Konsentrasi semua zat sama"], 1, "Pada kesetimbangan, laju reaksi maju dan balik sama."], ["Jika konsentrasi pereaksi ditambah, sistem cenderung bergeser untuk ...", ["Mengurangi pengaruh penambahan tersebut", "Menghentikan reaksi", "Menghilangkan katalis", "Mengubah nomor atom"], 0, "Menurut asas Le Chatelier, sistem merespons dengan mengurangi pengaruh gangguan."], ["Apa pengaruh katalis terhadap posisi kesetimbangan?", ["Menggeser ke kanan", "Menggeser ke kiri", "Tidak mengubah posisi kesetimbangan", "Mengubah nilai K"], 2, "Katalis mempercepat tercapainya kesetimbangan, tetapi tidak mengubah posisi atau nilai K."]]};
+
+  function tampilkanLatihan() {
+    document.querySelectorAll("[data-quiz]").forEach(container => {
+      const soal = bankSoal[container.dataset.quiz];
+      if (!soal) return;
+      const id = container.dataset.quiz;
+      container.innerHTML = `
+        <div class="quiz-heading"><h3>✦ Latihan Soal</h3><span>${soal.length} soal pilihan ganda</span></div>
+        ${soal.map((item, index) => `
+          <div class="quiz-question" data-question="${index}">
+            <p>${index + 1}. ${item[0]}</p>
+            <div class="quiz-options">
+              ${item[1].map((opsi, pilihan) => `
+                <label class="quiz-option">
+                  <input type="radio" name="${id}-q${index}" value="${pilihan}">
+                  <span>${String.fromCharCode(65 + pilihan)}. ${opsi}</span>
+                </label>`).join("")}
+            </div>
+            <button class="quiz-check" type="button" data-check="${index}">Periksa jawaban</button>
+            <div class="quiz-feedback" aria-live="polite"></div>
+          </div>`).join("")}
+        <div class="quiz-result" hidden aria-live="polite"></div>
+        <button class="quiz-reset" type="button" data-reset>Ulangi latihan</button>`;
+    });
+  }
+
+  document.addEventListener("click", event => {
+    const checkButton = event.target.closest("[data-check]");
+    const resetButton = event.target.closest("[data-reset]");
+
+    if (checkButton) {
+      const container = checkButton.closest("[data-quiz]");
+      const id = container.dataset.quiz;
+      const index = Number(checkButton.dataset.check);
+      const item = bankSoal[id][index];
+      const question = checkButton.closest(".quiz-question");
+      const selected = question.querySelector('input[type="radio"]:checked');
+      const feedback = question.querySelector(".quiz-feedback");
+
+      if (!selected) {
+        feedback.textContent = "Pilih salah satu jawaban terlebih dahulu.";
+        feedback.className = "quiz-feedback wrong";
+        return;
+      }
+
+      const benar = Number(selected.value) === item[2];
+      feedback.textContent = (benar ? "Benar! " : "Belum tepat. ") + item[3];
+      feedback.className = "quiz-feedback" + (benar ? "" : " wrong");
+      question.dataset.answered = "true";
+      question.dataset.correct = benar ? "true" : "false";
+      question.querySelectorAll("input").forEach(input => input.disabled = true);
+      checkButton.disabled = true;
+
+      const questions = [...container.querySelectorAll(".quiz-question")];
+      const answered = questions.filter(q => q.dataset.answered === "true");
+      if (answered.length === questions.length) {
+        const correct = answered.filter(q => q.dataset.correct === "true").length;
+        const result = container.querySelector(".quiz-result");
+        result.hidden = false;
+        result.textContent = `Nilai latihan: ${Math.round(correct / questions.length * 100)}/100 (${correct} dari ${questions.length} benar).`;
+      }
+    }
+
+    if (resetButton) {
+      const container = resetButton.closest("[data-quiz]");
+      container.querySelectorAll(".quiz-question").forEach(question => {
+        question.querySelectorAll("input").forEach(input => {
+          input.checked = false;
+          input.disabled = false;
+        });
+        question.dataset.answered = "false";
+        question.dataset.correct = "false";
+        question.querySelector("[data-check]").disabled = false;
+        const feedback = question.querySelector(".quiz-feedback");
+        feedback.textContent = "";
+        feedback.className = "quiz-feedback";
+      });
+      const result = container.querySelector(".quiz-result");
+      result.hidden = true;
+      result.textContent = "";
+    }
+  });
+
+  tampilkanLatihan();
+
   updateProgress();
   applyFilters();
 
