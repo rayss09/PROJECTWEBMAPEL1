@@ -1,5 +1,5 @@
 
-var $ = function (id) { return document.getElementById(id); };
+vasar $ = function (id) { return document.getElementById(id); };
 
 // Sapaan sesuai jam di perangkat
 var jam = new Date().getHours();
