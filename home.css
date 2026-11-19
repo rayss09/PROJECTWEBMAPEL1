@@ -233,9 +233,9 @@ h1 {
 .btn:focus-visible {
   background: var(--btn2) !important;
 
-  border: 2px solid #C9A227 !important;
+  border: 2px solid #d1c22a !important;
 
-  outline: 1px solid #C9A227;
+  outline: 1px solid #d1c22a;
 
   transform: translateY(-3px);
 
