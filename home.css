@@ -227,21 +227,23 @@ h1 {
   transition: transform .3s ease, opacity .3s ease;
 }
 
-/* HOVER GOLD - BORDER EMAS */
+/* GOLD METALLIC HOVER */
 .btn:hover,
 .btn:focus,
 .btn:focus-visible {
   background: var(--btn2) !important;
 
-  border: 2px solid #ffd700 !important;
-  outline: 1px solid rgba(255, 215, 0, .5);
+  border: 2px solid #FFD700 !important;
+
+  outline: 1px solid #FFF1A8;
 
   transform: translateY(-3px);
 
   box-shadow:
-    0 0 8px rgba(255, 215, 0, .7),
-    0 0 20px rgba(255, 215, 0, .5),
-    0 0 30px rgba(255, 215, 0, .25),
+    0 0 5px #FFD700,
+    0 0 12px #FFD700,
+    0 0 25px rgba(255, 215, 0, .85),
+    0 0 40px rgba(255, 193, 7, .45),
     0 10px 20px rgba(0, 0, 0, .35) !important;
 }
 
