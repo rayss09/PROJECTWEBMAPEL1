@@ -223,8 +223,12 @@ h1 {
 .btn:hover,
 .btn:focus-visible {
   background: var(--btn2);
+  border: 1.5px solid var(--gold);
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,.35);
+  box-shadow:
+    0 0 0 2px rgba(201,162,39,.12),
+    0 0 15px rgba(201,162,39,.35),
+    0 10px 20px rgba(0,0,0,.35);
 }
 
 .btn:hover .panah,
