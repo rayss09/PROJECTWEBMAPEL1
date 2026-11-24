@@ -1,7 +1,11 @@
+```javascript
+var $ = function (id) {
+  return document.getElementById(id);
+};
 
-var $ = function (id) { return document.getElementById(id); };
-
-// Sapaan sesuai jam di perangkat
+// ================================
+// SAPAAN SESUAI WAKTU
+// ================================
 var jam = new Date().getHours();
 var waktu = "malam";
 
@@ -9,9 +13,15 @@ if (jam >= 4 && jam < 11) waktu = "pagi";
 else if (jam >= 11 && jam < 15) waktu = "siang";
 else if (jam >= 15 && jam < 18) waktu = "sore";
 
-$("salam").textContent = "Selamat " + waktu + "! 👋";
+var elemenSalam = $("salam");
 
-// Nama bab utama Fisika kelas XI
+if (elemenSalam) {
+  elemenSalam.textContent = "Selamat " + waktu + "! 👋";
+}
+
+// ================================
+// NAMA BAB FISIKA KELAS XI
+// ================================
 var namaBab = {
   "xi-vektor": "Vektor",
   "xi-kinematika": "Kinematika",
@@ -20,7 +30,9 @@ var namaBab = {
   "xi-gelombang": "Gelombang, Bunyi, dan Cahaya"
 };
 
-// Nama bab utama Kimia kelas XI
+// ================================
+// NAMA BAB KIMIA KELAS XI
+// ================================
 var namaBabKimia = {
   "kimia-struktur-atom": "Struktur Atom dan Sistem Periodik",
   "kimia-ikatan": "Ikatan Kimia",
@@ -31,7 +43,9 @@ var namaBabKimia = {
   "kimia-kesetimbangan": "Kesetimbangan Kimia"
 };
 
-// Menghitung progres Fisika
+// ================================
+// PROGRES FISIKA
+// ================================
 function tampilkanProgresFisika() {
   var jumlah = 0;
   var babTerakhir = null;
@@ -62,11 +76,17 @@ function tampilkanProgresFisika() {
     });
 
   } catch (e) {
-    // Beranda tetap dapat dibuka jika penyimpanan browser tidak tersedia.
+    // Beranda tetap berjalan jika penyimpanan tidak tersedia.
   }
 
-  $("jumlah").textContent = jumlah;
+  // Tampilkan jumlah bab jika elemennya tersedia
+  var elemenJumlah = $("jumlah");
 
+  if (elemenJumlah) {
+    elemenJumlah.textContent = jumlah;
+  }
+
+  // Tampilkan bab terakhir
   var infoTerakhir = $("babTerakhir");
 
   if (infoTerakhir) {
@@ -82,12 +102,17 @@ function tampilkanProgresFisika() {
         : "tanggal belum tercatat";
 
       infoTerakhir.textContent =
-        "Bab terakhir selesai: " + babTerakhir.nama + " · " + tanggal;
+        "Bab terakhir selesai: " +
+        babTerakhir.nama +
+        " · " +
+        tanggal;
     }
   }
 }
 
-// Menghitung progres Kimia
+// ================================
+// PROGRES KIMIA
+// ================================
 function tampilkanProgresKimia() {
   var jumlah = 0;
 
@@ -103,7 +128,7 @@ function tampilkanProgresKimia() {
     });
 
   } catch (e) {
-    // Progres Kimia tetap aman jika penyimpanan tidak tersedia.
+    // Progres tetap aman jika penyimpanan tidak tersedia.
   }
 
   var elemenKimia = $("jumlahKimia");
@@ -113,7 +138,9 @@ function tampilkanProgresKimia() {
   }
 }
 
-// Tampilkan semua progres
+// ================================
+// TAMPILKAN SEMUA PROGRES
+// ================================
 function tampilkanSemuaProgres() {
   tampilkanProgresFisika();
   tampilkanProgresKimia();
@@ -121,33 +148,54 @@ function tampilkanSemuaProgres() {
 
 tampilkanSemuaProgres();
 
-// Perbarui angka ketika pengguna kembali ke tab beranda
+// Perbarui ketika kembali ke halaman
 window.addEventListener("focus", tampilkanSemuaProgres);
 window.addEventListener("storage", tampilkanSemuaProgres);
 
-// Tombol emas: kutipan semangat acak
+// ================================
+// TOMBOL SEMANGAT
+// ================================
 var kutipan = [
-  "Sedikit demi sedikit, lama-lama menjadi bukit.",
-  "Belajar hari ini, lega di hari ujian.",
-  "Kamu tidak harus sempurna, cukup mulai.",
-  "Rumus bisa dihafal, tapi paham itu lebih awet.",
-  "Istirahat sebentar boleh, menyerah jangan."
+  "✨ Sedikit demi sedikit, lama-lama menjadi bukit.",
+  "📚 Belajar hari ini, lega di hari ujian.",
+  "🌷 Kamu tidak harus sempurna, cukup mulai.",
+  "🧠 Rumus bisa dihafal, tapi paham itu lebih awet.",
+  "☀️ Istirahat sebentar boleh, menyerah jangan.",
+  "🌱 Proses kecil hari ini adalah kemajuan besar esok hari.",
+  "💡 Jangan takut salah, karena dari kesalahan kita belajar.",
+  "🎯 Fokus pada tujuanmu, bukan pada seberapa cepat orang lain.",
+  "🚀 Kamu lebih mampu daripada yang kamu kira.",
+  "🌟 Satu halaman yang kamu pelajari hari ini tetap sebuah kemajuan.",
+  "💪 Tidak perlu langsung bisa, yang penting jangan berhenti mencoba.",
+  "🍀 Setiap usaha kecilmu hari ini akan berarti di kemudian hari.",
+  "📖 Pelan-pelan saja, kamu sedang bertumbuh.",
+  "🔥 Kesulitan hari ini bisa menjadi kekuatanmu di masa depan.",
+  "🌻 Percayalah pada proses yang sedang kamu jalani."
 ];
 
 var terakhir = -1;
 
-$("semangat").addEventListener("click", function () {
-  var i;
+var tombolSemangat = $("semangat");
+var tempatPesan = $("pesan");
 
-  do {
-    i = Math.floor(Math.random() * kutipan.length);
-  } while (i === terakhir);
+if (tombolSemangat && tempatPesan) {
+  tombolSemangat.addEventListener("click", function () {
+    var i;
 
-  terakhir = i;
+    // Hindari kutipan yang sama secara berurutan
+    do {
+      i = Math.floor(Math.random() * kutipan.length);
+    } while (i === terakhir);
 
-  var p = $("pesan");
-  p.textContent = kutipan[i];
-  p.classList.remove("muncul");
-  void p.offsetWidth;
-  p.classList.add("muncul");
-});
+    terakhir = i;
+
+    // Tampilkan pesan
+    tempatPesan.textContent = kutipan[i];
+
+    // Ulangi animasi setiap tombol ditekan
+    tempatPesan.classList.remove("muncul");
+    void tempatPesan.offsetWidth;
+    tempatPesan.classList.add("muncul");
+  });
+}
+```
